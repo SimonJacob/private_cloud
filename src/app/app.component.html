@@ -1,0 +1,30 @@
+
+<div class="container">
+    <nav>
+        <ul class="nav nav-pills float-right">
+            <li>
+                <a class="nav-link " href="#">Button 1</a>
+            </li>
+            <li>
+                <a class="nav-link active" href="#">Username</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="header clearfix">
+        <h3>{{folderName}}</h3>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FileName</th>
+                <th>Created date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let file of files">
+                <td>{{file}}</td>
+                <td>2016-09-11 13:22</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
