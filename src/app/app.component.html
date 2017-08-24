@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let file of files">
-                <td>{{file}}</td>
+                <td (click)="gotoFolder(file)">{{file}}</td>
                 <td>2016-09-11 13:22</td>
             </tr>
         </tbody>

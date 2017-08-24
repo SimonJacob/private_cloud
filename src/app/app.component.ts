@@ -11,9 +11,16 @@ import {FolderService} from './folder.service'
 export class AppComponent {
   folderName = 'Home';
   files = [];
+  currentPath = "";
 
   constructor(private folderService: FolderService) {
-      this.folderService.getFolder('').subscribe(data => this.files = data);
+      this.folderService.getFolder(this.currentPath).subscribe(data => this.files = data);
+  }
+
+  gotoFolder(folder: string) {
+      this.currentPath += "/" + folder;
+      this.folderService.getFolder(this.currentPath).subscribe(data => this.files = data);
+
   }
 
 
