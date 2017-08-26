@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 // Get all posts
 router.get('/folder/:path([A-Za-z0-9/]{0,})', (req, res) => {
-    console.log("folder: " + req.params.path);
+    // console.log("folder: " + req.params.path);
   // Get posts from the mock api
   // This should ideally be replaced with a service that connects to MongoDB
   // axios.get(`${API}/posts`)
@@ -38,7 +38,19 @@ router.get('/folder/:path([A-Za-z0-9/]{0,})', (req, res) => {
         files.forEach(function(f) {
             // console.log('Files: ' + f);
             if (f[0] != '.') {
-                res_files.push(f);
+                file = {};
+                file['name'] = f;
+                stats = fs.statSync(dirname+"/"+f);
+                file["size"] = stats.size;
+                file["created_date"] = stats.birthtime;
+                if (stats.isFile()) {
+                    file["type"] = "file";
+                } else if (stats.isDirectory()) {
+                    file["type"] = "directory";
+                } else {
+                    file["type"] = "unknown";
+                }
+                res_files.push(file);
             }
         });
         res.status(200).json(res_files);

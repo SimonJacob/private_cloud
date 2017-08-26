@@ -12,18 +12,26 @@
     </nav>
     <div class="header clearfix">
         <h3>{{folderName}}</h3>
+        <ol class="breadcrumbs">
+            <li (click)="backToFolder(0)">Home</li>
+            <li *ngFor="let folder of path; let i = index" (click)="backToFolder(i+1)">{{folder}}</li>
+        </ol>
     </div>
     <table class="table">
         <thead>
             <tr>
                 <th>FileName</th>
                 <th>Created date</th>
+                <th>Size</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let file of files">
-                <td (click)="gotoFolder(file)">{{file}}</td>
-                <td>2016-09-11 13:22</td>
+                <td (click)="gotoFolder(file)">{{file.name}}</td>
+                <td>{{file.created_date}}</td>
+                <td>{{beautifySize(file.size)}}</td>
+                <td>{{file.type}}</td>
             </tr>
         </tbody>
     </table>

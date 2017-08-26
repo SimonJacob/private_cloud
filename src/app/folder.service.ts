@@ -9,8 +9,12 @@ export class FolderService {
         private http: Http
     ) {}
 
-    getFolder(folder: string) {
-        return this.http.get('/api/folder/' + folder)
+    getFolder(path: Array<string>) {
+        var stringPath = "";
+        for (let folder of path) {
+            stringPath += folder + "/";
+        }
+        return this.http.get('/api/folder/' + stringPath)
         .map((res:Response) => res.json());
     }
 
